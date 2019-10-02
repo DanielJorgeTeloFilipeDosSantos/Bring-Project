@@ -3,10 +3,11 @@
 const { join } = require("path");
 const express = require("express");
 const createError = require("http-errors");
-const cookieParser = require("cookie-parser");
+
 const logger = require("morgan");
 const serveFavicon = require("serve-favicon");
 const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const passport = require("passport");
 
 const expressSession = require("express-session");
@@ -27,32 +28,37 @@ app.use(logger("dev"));
 app.use(express.json());
 
 //--------PASSPORT SET UP HERE:
-app.use(express.urlencoded({ extended: false }));
-app.use(
-  session({
-    secret: "some secret goes here",
-    resave: true,
-    saveUninitialized: true
-  })
-);
+
+const bodyParser = require("body-parser");
+// Body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// app.use(
+//   session({
+//     secret: "some secret goes here",
+//     resave: true,
+//     saveUninitialized: true
+//   })
+//);
 app.use(passport.initialize());
 app.use(passport.session());
 
 //--------PASSPORT SET UP END
 
-// app.use(cookieParser());
-// app.use(
-//   expressSession({
-//     secret: process.env.SESSION_SECRET,
-//     cookie: { maxAge: 60 * 60 * 24 * 1000 },
-//     resave: true,
-//     saveUninitialized: false,
-//     store: new MongoStore({
-//       mongooseConnection: mongoose.connection,
-//       ttl: 24 * 60 * 60
-//     })
-//   })
-// );
+app.use(cookieParser());
+app.use(
+  expressSession({
+    secret: process.env.SESSION_SECRET,
+    cookie: { maxAge: 60 * 60 * 24 * 1000 },
+    resave: true,
+    saveUninitialized: false,
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+      ttl: 24 * 60 * 60
+    })
+  })
+);
 
 // app.use(deserializeUserMiddleware);
 
