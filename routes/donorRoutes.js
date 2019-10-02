@@ -4,6 +4,7 @@ const { Router } = require("express");
 const router = Router();
 const bcrypt = require("bcrypt");
 const donorUser = require("../models/donorUser");
+const mongoose = require("mongoose");
 
 //test route -------------------------------------------------------
 
@@ -99,20 +100,39 @@ router.post("/updateProfile", (req, res, next) => {
 
 //res/deleteProfile  -------------------------------------------------------
 
-router.delete("/deleteProfile/:donor_id", function(req, res) {
-  res.json({ msg: req.params.donor_id });
-  donorUser.remove(
-    {
-      _id: req.params.donor_id,
-      ownerID: req.user._id
-    },
-    function(err, user) {
-      if (err) return console.error(err);
+// router.get("/deleteProfile/:donor_id", function(req, res) {
+//   res.json({ msg: req.params.donor_id });
+//   donorUser.remove(
+//     {
+//       _id: req.params.donor_id,
+//       ownerID: req.user._id
+//     },
+//     function(err, user) {
+//       if (err) return console.error(err);
 
-      console.log("User successfully removed from donors collection!");
-      res.status(200).send();
-    }
-  );
+//       console.log("User successfully removed from donors collection!");
+//       res.status(200).send();
+//     }
+//   );
+// });
+
+router.delete("/deleteProfile/:donor_id", (req, res, next) => {
+  donorUser
+    .findByIdAndRemove(req.params.donor_id)
+    .then(res.json({ msg: "donoraaaa works" }))
+    .catch(err => next(err));
 });
+
+// Todo.findByIdAndRemove(req.params.todoId, (err, todo) => {
+//   // As always, handle any potential errors:
+//   if (err) return res.status(500).send(err);
+//   // We'll create a simple object to send back with a message and the id of the document that was removed
+//   // You can really do this however you want, though.
+//   const response = {
+//       message: "Todo successfully deleted",
+//       id: todo._id
+//   };
+//   return res.status(200).send(response);
+// });
 
 module.exports = router;
