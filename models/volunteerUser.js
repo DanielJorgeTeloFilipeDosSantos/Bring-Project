@@ -42,6 +42,14 @@ const volunteerSchema = new mongoose.Schema({
       default: "",
       ref: "collectionEvent"
     }
+  ],
+  donationPost: [
+    {
+      type: ObjectId,
+      default: "",
+      ref: "DonationEvent",
+      pickedUp: { type: Boolean, default: false }
+    }
   ]
 });
 

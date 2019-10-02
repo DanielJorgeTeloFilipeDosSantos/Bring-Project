@@ -19,6 +19,11 @@ const organisationSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true
+  },
+  cathegory: {
+    type: String,
+    required: true,
+    enum: ["Food", "Clothing", "Furniture"]
   }
 });
 
