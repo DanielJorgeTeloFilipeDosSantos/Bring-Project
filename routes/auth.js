@@ -19,7 +19,7 @@ const VolunteerUser = require("../models/volunteerUser");
 
 authRoutes.post("/register", (req, res, next) => {
   const username = req.body.username;
-  const password = req.body.passwordHash;
+  const password = req.body.password;
 
   if (!username || !password) {
     res.status(400).json({ message: "Provide username and password" });
@@ -104,6 +104,21 @@ authRoutes.post("/login", (req, res, next) => {
       res.status(200).json(theUser);
     });
   })(req, res, next);
+});
+
+authRoutes.post("/logout", (req, res, next) => {
+  // req.logout() is defined by passport
+  req.logout();
+  res.status(200).json({ message: "Log out success!" });
+});
+
+authRoutes.get("/loggedin", (req, res, next) => {
+  // req.isAuthenticated() is defined by passport
+  if (req.isAuthenticated()) {
+    res.status(200).json(req.user);
+    return;
+  }
+  res.status(403).json({ message: req.isAuthenticated() });
 });
 
 module.exports = authRoutes;
