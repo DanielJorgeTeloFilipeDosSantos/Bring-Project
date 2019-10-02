@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const volunteerSchema = new mongoose.Schema({
+const volunteer2Schema = new mongoose.Schema({
   // firstname: {
   //   type: String,
   //   trim: true,
@@ -54,6 +54,6 @@ const volunteerSchema = new mongoose.Schema({
   // ]
 });
 
-const VolunteerUser = mongoose.model("volunteerusers", volunteerSchema);
+const VolunteerUser2 = mongoose.model("volunteeruser2", volunteer2Schema);
 
-module.exports = VolunteerUser;
+module.exports = VolunteerUser2;

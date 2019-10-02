@@ -19,7 +19,7 @@ const VolunteerUser = require("../models/volunteerUser");
 
 authRoutes.post("/register", (req, res, next) => {
   const username = req.body.username;
-  const password = req.body.passwordHash;
+  const password = req.body.password;
 
   if (!username || !password) {
     res.status(400).json({ message: "Provide username and password" });
