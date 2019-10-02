@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 
-const Schema = mongoose.Schema;
-
-const VolunteerSchema = new Schema({
+const schema = new mongoose.Schema({
   firstName: {
     type: String,
     required: true
@@ -28,4 +26,6 @@ const VolunteerSchema = new Schema({
   }
 });
 
-module.exports = User = mongoose.model("restaurants", RestaurantSchema);
+const VolunteerUser = mongoose.model("VolunteerUser", schema);
+
+module.exports = VolunteerUser;
