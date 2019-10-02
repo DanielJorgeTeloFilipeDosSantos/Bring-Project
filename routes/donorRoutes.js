@@ -99,16 +99,16 @@ router.post("/updateProfile", (req, res, next) => {
 
 //res/deleteProfile  -------------------------------------------------------
 
-router.delete("/user/:id", function(req, res) {
-  User.remove(
+router.delete("/deleteProfile", function(req, res) {
+  donorUser.remove(
     {
-      _id: req.params.id,
+      _id: req.params.donor_id,
       ownerID: req.user._id
     },
     function(err, user) {
       if (err) return console.error(err);
 
-      console.log("User successfully removed from polls collection!");
+      console.log("User successfully removed from donors collection!");
       res.status(200).send();
     }
   );
