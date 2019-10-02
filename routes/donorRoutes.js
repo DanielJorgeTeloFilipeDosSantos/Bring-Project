@@ -88,9 +88,9 @@ router.post("/login", (req, res) => {
 router.post("/updateProfile", (req, res, next) => {
   const { name, foto } = req.body;
   donorUser
-    .update({ _id: req.query.restaurant_id }, { $set: { name, foto } })
-    .then(restaurant => {
-      res.json({ msg: "restaurant updated", restaurantt: restaurant });
+    .update({ _id: req.query.donor_id }, { $set: { name, foto } })
+    .then(donor => {
+      res.json({ msg: "donor updated", donorr: donor });
     })
     .catch(error => {
       console.log(error);
