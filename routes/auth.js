@@ -15,7 +15,7 @@ const passport = require("passport");
 const bcrypt = require("bcrypt");
 
 // require the user model !!!!
-const VolunteerUser = require("../models/VolunteerUser");
+const VolunteerUser = require("../models/volunteerUser");
 
 authRoutes.post("/register", (req, res, next) => {
   const username = req.body.username;
