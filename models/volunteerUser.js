@@ -1,31 +1,50 @@
-const mongoose = require("mongoose");
+"use strict";
 
-const schema = new mongoose.Schema({
-  firstName: {
+const mongoose = require("mongoose");
+const ObjectId = mongoose.Schema.Types.ObjectId;
+
+const volunteerSchema = new mongoose.Schema({
+  firstname: {
     type: String,
+    trim: true,
     required: true
   },
-  lastName: {
+  lastname: {
     type: String,
+    trim: true,
     required: true
   },
   email: {
     type: String,
+    lowercase: true,
+    trim: true,
     required: true,
     unique: true
   },
   username: {
     type: String,
-    lowercase: true,
     trim: true,
+    required: true,
     unique: true
   },
-  password: {
+  passwordHash: {
     type: String,
-    require: true
-  }
+    required: true,
+    trim: true
+  },
+  imageURL: {
+    type: String,
+    default: "../images/default-user-icon-4.jpg"
+  },
+  collectionEventsAttending: [
+    {
+      type: ObjectId,
+      default: "",
+      ref: "collectionEvent"
+    }
+  ]
 });
 
-const VolunteerUser = mongoose.model("VolunteerUser", schema);
+const VolunteerUser = mongoose.model("VolunteerUser", volunteerSchema);
 
 module.exports = VolunteerUser;

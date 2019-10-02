@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
+//use onject if when cross referencing to otehr models -->
+//const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const schema = new mongoose.Schema({
+const organisationSchema = new mongoose.Schema({
   organisationName: {
     type: String,
     required: true,
@@ -13,12 +15,13 @@ const schema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  password: {
+  passwordHash: {
     type: String,
-    require: true
+    required: true,
+    trim: true
   }
 });
 
-const VolunteerUser = mongoose.model("VolunteerUser", schema);
+const OrganisationUser = mongoose.model("OrganisationUser", organisationSchema);
 
-module.exports = VolunteerUser;
+module.exports = OrganisationUser;
