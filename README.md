@@ -3,4 +3,3 @@
 # Bring
 
 An app to Share love, and food
-Because alles hat ein ende nur die wurst hat zwei!!!!!!
