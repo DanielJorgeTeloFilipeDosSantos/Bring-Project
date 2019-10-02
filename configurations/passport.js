@@ -30,7 +30,7 @@ passport.use(
         return;
       }
 
-      if (!bcrypt.compareSync(password, foundUser.password)) {
+      if (!bcrypt.compareSync(password, foundUser.passwordHash)) {
         next(null, false, { message: "Incorrect password." });
         return;
       }
