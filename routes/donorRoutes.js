@@ -99,7 +99,8 @@ router.post("/updateProfile", (req, res, next) => {
 
 //res/deleteProfile  -------------------------------------------------------
 
-router.delete("/deleteProfile", function(req, res) {
+router.delete("/deleteProfile/:donor_id", function(req, res) {
+  res.json({ msg: req.params.donor_id });
   donorUser.remove(
     {
       _id: req.params.donor_id,
