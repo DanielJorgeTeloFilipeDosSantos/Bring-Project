@@ -15,11 +15,11 @@ const passport = require("passport");
 const bcrypt = require("bcrypt");
 
 // require the user model !!!!
-const VolunteerUser = require("../models/volunteerUser");
+const VolunteerUser = require("../models/VolunteerUser");
 
-authRoutes.post("/signup", (req, res, next) => {
+authRoutes.post("/register", (req, res, next) => {
   const username = req.body.username;
-  const password = req.body.password;
+  const password = req.body.passwordHash;
 
   if (!username || !password) {
     res.status(400).json({ message: "Provide username and password" });
@@ -50,7 +50,7 @@ authRoutes.post("/signup", (req, res, next) => {
 
     const aNewUser = new VolunteerUser({
       username: username,
-      password: hashPass
+      passwordHash: hashPass
     });
 
     aNewUser.save(err => {
