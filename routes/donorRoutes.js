@@ -3,7 +3,7 @@
 const { Router } = require("express");
 const router = Router();
 const bcrypt = require("bcrypt");
-const restaurantUser = require("../models/donorUser");
+const donorUser = require("../models/donorUser");
 
 //test route -------------------------------------------------------
 
@@ -14,11 +14,11 @@ router.get("/test", (req, res, next) => {
 //res/register -------------------------------------------------------
 
 router.post("/register", (req, res) => {
-  restaurantUser.findOne({ name: req.body.name }).then(user => {
+  donorUser.findOne({ name: req.body.name }).then(user => {
     if (user) {
       return res.status(404).json({ name: "name already exists ma man" });
     } else {
-      const newUser = new restaurantUser({
+      const newUser = new donorUser({
         name: req.body.name,
         foto: req.body.foto,
         password: req.body.password
@@ -87,7 +87,7 @@ router.post("/login", (req, res) => {
 
 router.post("/updateProfile", (req, res, next) => {
   const { name, foto } = req.body;
-  restaurantUser
+  donorUser
     .update({ _id: req.query.restaurant_id }, { $set: { name, foto } })
     .then(restaurant => {
       res.json({ msg: "restaurant updated", restaurantt: restaurant });
