@@ -15,7 +15,10 @@ const RestaurantSchema = new Schema(
 
       required: true
     },
-
+    foto: {
+      type: String,
+      required: true
+    },
     date: {
       type: Date,
 
@@ -25,4 +28,7 @@ const RestaurantSchema = new Schema(
   { versionKey: false }
 );
 
-module.exports = User = mongoose.model("restaurants", RestaurantSchema);
+module.exports = restaurantUser = mongoose.model(
+  "restaurants",
+  RestaurantSchema
+);

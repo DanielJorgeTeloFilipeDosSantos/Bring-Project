@@ -3,24 +3,24 @@
 const { Router } = require("express");
 const router = Router();
 const bcrypt = require("bcrypt");
-const User = require("../models/users");
+const restaurantUser = require("../models/restaurantUser");
 
 //test route -------------------------------------------------------
 
-router.get("/", (req, res, next) => {
+router.get("/test", (req, res, next) => {
   res.json({ msg: "restaurant works" });
 });
 
 //res/register -------------------------------------------------------
 
 router.post("/register", (req, res) => {
-  User.findOne({ email: req.body.email }).then(user => {
+  restaurantUser.findOne({ name: req.body.name }).then(user => {
     if (user) {
-      return res.status(404).json({ email: "email already exists ma man" });
+      return res.status(404).json({ name: "name already exists ma man" });
     } else {
-      const newUser = new User({
+      const newUser = new restaurantUser({
         name: req.body.name,
-        email: req.body.email,
+        foto: req.body.foto,
         password: req.body.password
       });
       bcrypt.genSalt(10, (err, salt) => {
@@ -84,5 +84,34 @@ router.post("/login", (req, res) => {
 //res/addSingleFood  -------------------------------------------------------
 
 //res/updateProfile   -------------------------------------------------------
+
+router.post("/updateProfile", (req, res, next) => {
+  const { name, foto } = req.body;
+  restaurantUser
+    .update({ _id: req.query.restaurant_id }, { $set: { name, foto } })
+    .then(restaurant => {
+      res.json({ msg: "restaurant updated", restaurantt: restaurant });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+});
+
+//res/deleteProfile  -------------------------------------------------------
+
+router.delete("/user/:id", function(req, res) {
+  User.remove(
+    {
+      _id: req.params.id,
+      ownerID: req.user._id
+    },
+    function(err, user) {
+      if (err) return console.error(err);
+
+      console.log("User successfully removed from polls collection!");
+      res.status(200).send();
+    }
+  );
+});
 
 module.exports = router;
