@@ -3,12 +3,12 @@
 const { Router } = require("express");
 const router = Router();
 const bcrypt = require("bcrypt");
-const restaurantUser = require("../models/restaurantUser");
+const restaurantUser = require("../models/donorUser");
 
 //test route -------------------------------------------------------
 
 router.get("/test", (req, res, next) => {
-  res.json({ msg: "restaurant works" });
+  res.json({ msg: "donor works" });
 });
 
 //res/register -------------------------------------------------------

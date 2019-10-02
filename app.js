@@ -14,7 +14,7 @@ const mongoose = require("mongoose");
 const deserializeUserMiddleware = require("./middleware/deserialize-user");
 
 const authRouter = require("./routes/auth");
-const restaurantRouter = require("./routes/restaurantRoutes");
+const restaurantRouter = require("./routes/donorRoutes");
 
 const app = express();
 

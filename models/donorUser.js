@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const RestaurantSchema = new Schema(
+const DonorSchema = new Schema(
   {
     name: {
       type: String,
@@ -28,7 +28,4 @@ const RestaurantSchema = new Schema(
   { versionKey: false }
 );
 
-module.exports = restaurantUser = mongoose.model(
-  "restaurants",
-  RestaurantSchema
-);
+module.exports = donorUser = mongoose.model("donors", DonorSchema);
