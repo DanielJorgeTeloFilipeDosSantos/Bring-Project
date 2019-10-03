@@ -1,5 +1,7 @@
 const VolunteerUser = require("../models/volunteerUser");
+const DonorUser = require("../models/donorUser");
 const LocalStrategy = require("passport-local").Strategy;
+const DonorStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt"); // !!!
 const passport = require("passport");
 
@@ -31,6 +33,29 @@ passport.use(
       }
 
       if (!bcrypt.compareSync(password, foundUser.passwordHash)) {
+        next(null, false, { message: "Incorrect password." });
+        return;
+      }
+
+      next(null, foundUser);
+    });
+  })
+);
+
+passport.use(
+  new DonorStrategy((username, password, next) => {
+    DonorUser.findOne({ username }, (err, foundUser) => {
+      if (err) {
+        next(err);
+        return;
+      }
+
+      if (!foundUser) {
+        next(null, false, { message: "Incorrect username." });
+        return;
+      }
+
+      if (!bcrypt.compareSync(password, foundUser.password)) {
         next(null, false, { message: "Incorrect password." });
         return;
       }

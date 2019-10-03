@@ -71,7 +71,7 @@ app.use(
 
 app.use("/auth", authRouter);
 app.use("/donor", donorRouter);
-app.use("/donorAuth", donorAuthRouter);
+app.use("/donorsAuth", donorAuthRouter);
 app.use("/organisation/auth", organisationAuthRouter);
 
 app.get("*", (req, res, next) => {
