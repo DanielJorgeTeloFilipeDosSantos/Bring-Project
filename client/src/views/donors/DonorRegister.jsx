@@ -9,15 +9,13 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import { withRouter } from "react-router-dom";
-import axios from "axios";
+import * as AuthenticationServices from "../../services/api";
 
 export class Signup2 extends Component {
   constructor() {
     super();
     this.state = {
-      name: "",
-      // email: "",
+      username: "",
       password: ""
     };
     this.onChange = this.onChange.bind(this);
@@ -44,16 +42,19 @@ export class Signup2 extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const userData = {
-      username: this.state.name,
-      // email: this.state.email,
-      password: this.state.password
-    };
-    console.log("userData", userData);
-    axios.post("/donorsAuth/register", userData);
-    this.props.history.push("/");
-
-    //connect to axios
+    const { username, password } = this.state;
+    AuthenticationServices.signUpService({
+      username,
+      password
+    })
+      .then(user => {
+        console.log("uuuuu");
+        this.props.history.push("/");
+        console.log("asdad");
+      })
+      .catch(error => {
+        console.log("error", error);
+      });
   };
 
   render() {
@@ -93,10 +94,10 @@ export class Signup2 extends Component {
                 margin="normal"
                 required
                 fullWidth
-                id="name"
+                id="username"
                 label="Your Name"
-                name="name"
-                autoComplete="name"
+                name="username"
+                autoComplete="username"
                 value={this.state.name}
                 onChange={this.onChange}
                 autoFocus
