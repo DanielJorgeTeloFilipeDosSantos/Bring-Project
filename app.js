@@ -19,6 +19,7 @@ const deserializeUserMiddleware = require("./middleware/deserialize-user");
 
 const authRouter = require("./routes/volunteerAuth");
 const donorRouter = require("./routes/donorRoutes");
+const donorAuthRouter = require("./routes/donorAuth");
 
 const app = express();
 
@@ -64,6 +65,7 @@ app.use(
 
 app.use("/auth", authRouter);
 app.use("/donor", donorRouter);
+app.use("/donorAuth", donorAuthRouter);
 
 app.get("*", (req, res, next) => {
   res.sendFile(join(__dirname, "./client/build/index.html"));
