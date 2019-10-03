@@ -19,7 +19,7 @@ export default class HomeView extends Component {
         <Container>
           <h2>Help us give to who has less</h2>
         </Container>
-        <Link to="/register">
+        <Link to="/donor-register">
           <Button
             variant="contained"
             color="primary"

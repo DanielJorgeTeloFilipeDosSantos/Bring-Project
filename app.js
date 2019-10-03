@@ -17,7 +17,7 @@ require("./configurations/passport");
 
 const deserializeUserMiddleware = require("./middleware/deserialize-user");
 
-const authRouter = require("./routes/auth");
+const authRouter = require("./routes/volunteerAuth");
 const donorRouter = require("./routes/donorRoutes");
 
 const app = express();
