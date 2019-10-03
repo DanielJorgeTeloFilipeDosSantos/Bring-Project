@@ -18,6 +18,7 @@ const bcrypt = require("bcrypt");
 const donorUser = require("../models/donorUser");
 
 authRoutes.post("/register", (req, res, next) => {
+  console.log(req.body);
   const username = req.body.username;
   const password = req.body.password;
 
@@ -55,9 +56,8 @@ authRoutes.post("/register", (req, res, next) => {
 
     aNewUser.save(err => {
       if (err) {
-        res
-          .status(400)
-          .json({ message: "Saving user to database went wrong." });
+        console.log(err);
+        res.status(400).json({ message: err });
         return;
       }
 

@@ -32,7 +32,7 @@ passport.use(
         return;
       }
 
-      if (!bcrypt.compareSync(password, foundUser.passwordHash)) {
+      if (!bcrypt.compareSync(password, foundUser.password)) {
         next(null, false, { message: "Incorrect password." });
         return;
       }
@@ -51,7 +51,13 @@ passport.use(
       }
 
       if (!foundUser) {
-        next(null, false, { message: "Incorrect username." });
+        next(null, false, {
+          username: username,
+          password,
+          foundUser,
+          err,
+          DonorUser
+        });
         return;
       }
 

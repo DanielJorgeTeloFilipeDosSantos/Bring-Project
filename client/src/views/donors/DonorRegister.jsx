@@ -10,13 +10,14 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { withRouter } from "react-router-dom";
+import axios from "axios";
 
 export class Signup2 extends Component {
   constructor() {
     super();
     this.state = {
       name: "",
-      email: "",
+      // email: "",
       password: ""
     };
     this.onChange = this.onChange.bind(this);
@@ -43,13 +44,16 @@ export class Signup2 extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-
-    const newUser = {
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password,
-      password2: this.state.password2
+    const userData = {
+      username: this.state.name,
+      // email: this.state.email,
+      password: this.state.password
     };
+    console.log("userData", userData);
+    axios.post("/donorsAuth/register", userData);
+    this.props.history.push("/");
+
+    //connect to axios
   };
 
   render() {
@@ -97,7 +101,7 @@ export class Signup2 extends Component {
                 onChange={this.onChange}
                 autoFocus
               />
-              <TextField
+              {/* <TextField
                 variant="outlined"
                 margin="normal"
                 required
@@ -109,7 +113,7 @@ export class Signup2 extends Component {
                 value={this.state.email}
                 onChange={this.onChange}
                 autoFocus
-              />
+              /> */}
               <TextField
                 variant="outlined"
                 margin="normal"

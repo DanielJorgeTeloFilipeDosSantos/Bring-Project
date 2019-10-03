@@ -13,7 +13,7 @@ router.get("/test", (req, res, next) => {
 });
 
 //res/register -------------------------------------------------------
-// done with passport http://localhost:3010/donorsAuth/logout
+// done with passport http://localhost:3010/donorsAuth/register
 
 //res/signin   -------------------------------------------------------
 //done with passport http://localhost:3010/donorsAuth/logout
@@ -42,7 +42,7 @@ router.post("/updateProfile", (req, res, next) => {
 router.delete("/deleteProfile/:donor_id", (req, res, next) => {
   donorUser
     .findByIdAndRemove(req.params.donor_id)
-    .then(res.json({ msg: "donoraaaa works" }))
+    .then(res.json({ msg: "donoraaaa deleted" }))
     .catch(err => next(err));
 });
 
