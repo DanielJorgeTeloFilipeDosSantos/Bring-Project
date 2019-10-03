@@ -17,9 +17,15 @@ require("./configurations/passport");
 
 const deserializeUserMiddleware = require("./middleware/deserialize-user");
 
+//VOLUNTEER
 const authRouter = require("./routes/volunteerAuth");
+
+//DONOR
 const donorRouter = require("./routes/donorRoutes");
-const donorAuthRouter = require("./routes/donorAuth");
+const donorAuthRouter = require("./routes/donorsAuth");
+
+//ORGANISATION
+const organisationAuthRouter = require("./routes/organisationAuth");
 
 const app = express();
 
@@ -66,6 +72,7 @@ app.use(
 app.use("/auth", authRouter);
 app.use("/donor", donorRouter);
 app.use("/donorAuth", donorAuthRouter);
+app.use("/organisation/auth", organisationAuthRouter);
 
 app.get("*", (req, res, next) => {
   res.sendFile(join(__dirname, "./client/build/index.html"));

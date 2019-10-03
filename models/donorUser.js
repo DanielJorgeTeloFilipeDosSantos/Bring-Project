@@ -8,7 +8,6 @@ const DonorSchema = new Schema({
     lowercase: true,
     trim: true,
     unique: true,
-
     required: true
   },
 
